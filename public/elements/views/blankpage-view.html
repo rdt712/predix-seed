@@ -1,0 +1,91 @@
+<!-- Predix-UI-Lab1 - Exercise 3 - Link Predix Web Component -->
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/px-sample-cards/blank-card.html">
+<link rel="import" href="../../bower_components/px-view-header/px-view-header.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+
+
+<dom-module id="blankpage-view">
+  <template>
+	   <!-- Predix-UI-Lab1 - Exercise 3 - Add a new Component - Uncomment the following block to add a px-data-table -->
+	   <!--
+	   <px-view-header title="<Add Your Title Here!!!>" style="display: block; margin-bottom: 6px;"></px-view-header>
+	   <px-card header-text="My Asset Details" icon="fa-fort-awesome">
+          	   <p> An example of a px-card and px-data-table. </p>
+		   <h3>{{assetDescription}}</h3>
+           	   <px-data-table table-data="{{assetTableData}}" striped="true" filterable="true" show-column-chooser="true" table-columns="true" table-rows="true" hide-pagination-control="true" >
+	 	  </px-data-table>
+	   </px-card>
+           <iron-ajax url="/api/predix-asset/compressor-2017" id="assetQueryElement" last-response="{{rawAssetData}}" auto></iron-ajax>
+	   -->
+  </template>
+
+<!-- Predix-UI-Lab1 - Exercise 3 - Uncomment the <script> tags to read data from the JSON file. -->
+<!--
+<script>
+Polymer({
+      is: 'blankpage-view',
+      properties: {
+        tsChartData: {
+          type: Array
+        },
+        rawAssetData: {
+          type: Object,
+          observer: '_formatDataForTable'
+        },
+        assetTableData: {
+          type: Object
+        },
+        assetDescription: {
+          type: String
+        }
+      },
+
+      _formatDataForTable: function(raw) {
+        if (raw[0].assetTag) {
+          this._formatAssetTagsForTable(raw);
+        } else {
+          this._formatEngineDataForTable(raw);
+        }
+      },
+
+      _formatAssetTagsForTable: function(raw) {
+        var sensor, sensors = [];
+        var assetTags = raw[0].assetTag;
+        for (var property in assetTags) {
+          if (assetTags.hasOwnProperty(property)) {
+            sensor = assetTags[property];
+            delete sensor.complexType;
+            delete sensor.tagDatasource;
+            sensors.push(sensor);
+          }
+        }
+        this.assetTableData = sensors;
+        this.assetDescription = raw[0].description + ": " + raw[0].assetId;
+      },
+
+      _formatEngineDataForTable: function(raw) {
+        raw.forEach(function(engine) {
+          engine.partUri = engine.jetEnginePart.uri;
+          engine.partSerialNo = engine.jetEnginePart.sNo;
+          delete engine.jetEnginePart;
+        })
+        this.assetTableData = raw;
+        this.assetDescription = "Jet Engines";
+      }
+    });
+  </script>
+-->
+<!-- Predix-UI-Lab1 - Exercise 3 - comment old script.. -->
+
+  <script>
+    Polymer({
+      is: 'blankpage-view',
+      properties: {},
+      ready: function() {
+        console.log('blankpage-view ready()')
+      }
+    });
+  </script>
+
+</dom-module>
